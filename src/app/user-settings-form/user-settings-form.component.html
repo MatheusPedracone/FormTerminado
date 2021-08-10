@@ -1,0 +1,126 @@
+<div class="container">
+  <h2>Informações do usuário</h2>
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="mb-3 form-group">
+      <label for="name">Nome</label>
+      <input
+        id="name"
+        type="text"
+        name="name"
+        class="form-control"
+        ngDefaultControl
+        [(ngModel)]="userSettings.name"
+        #nome="ngModel"
+        [class.field-error]="form.submitted && nome.invalid"
+        required
+      />
+       <div [hidden]="!form.submitted || nome.valid" class="alert alert-danger">
+        Nome é obrigatório
+      </div>
+    </div>
+    
+    <div class="col-xs-12 col-12 col-md-4 form-group">
+      <label for="startDate">start date</label>
+      <input type="text"
+      placeholder="Datepicker"
+      class="form-control"
+      bsDatepicker
+      [bsConfig]="{ isAnimated: true }"
+      name="startDate"
+      [(ngModel)]="startDate"
+      id="startDate">
+    </div>
+
+<br>
+    <button type="button" class="btn btn-primary form-group"
+        [(ngModel)]="singleModel" 
+        btnCheckbox
+        name="singleModel"
+        >
+      {{ singleModel ? "On" : "Off"}}
+    </button>
+
+    <div class="mb-3 form-check">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="checkbox"
+        name="checkbox"
+        [(ngModel)]="userSettings.checkbox"
+        required
+        #Check="ngModel"
+        [class.field-error]="form.submitted && Check.invalid"
+      />
+      <label for="form-check-label" for="lieaceito">
+        Li e aceito os termos
+      </label>
+    </div>
+    <div [hidden]="!form.submitted || Check.valid" class="alert alert-danger">
+      selecionar opção
+    </div> 
+
+    
+
+
+
+
+    <div class="mb-3 form-group">
+      <div class="btn-group">
+        <label class="btn btn-primary" [(ngModel)]="userSettings.exampleRadios"
+               name="exampleRadios" btnRadio="Left" tabindex="0" role="button" #a3="ngModel">Left</label>
+        <label class="btn btn-primary" [(ngModel)]="userSettings.exampleRadios"
+        name="exampleRadios" btnRadio="Middle" tabindex="0" role="button" #a3="ngModel">Middle</label>
+        <label class="btn btn-primary" [(ngModel)]="userSettings.exampleRadios"
+        name="exampleRadios" btnRadio="Right" tabindex="0" role="button" #a3="ngModel">Right</label>
+      </div>
+       <div [hidden]="!form.submitted || a3.valid" class="alert alert-danger">
+        selecionar uma opção desejada
+      </div> 
+    </div>
+
+    <div class="mb-3 form-group">
+      <label for="escolha">Escolha</label>
+      <select
+        ngDefaultControl
+        class="form-select"
+        id="escolha"
+        name="escolha"
+        [(ngModel)]="userSettings.escolha"
+        required
+        #a4="ngModel"
+        [class.field-error]="form.submitted && a4.invalid"
+      >
+        <option *ngFor="let type of escolhas | async">
+          {{type}}
+        </option>
+       
+      </select>
+      <div [hidden]="!form.submitted || a4.valid" class="alert alert-danger">
+        escolha uma opção
+      </div> 
+    </div>
+
+    <div class="mb-3">
+      <label for="notes" class="form-label">Example textarea</label>
+      <textarea
+        ngDefaultControlFF
+        name="textarea"
+        class="form-control"
+        id="notes"
+        rows="3"
+        #a5="ngModel"
+        [(ngModel)]="userSettings.textarea"
+        required
+        [class.field-error]="form.submitted && a5.invalid"
+      ></textarea>
+       <div [hidden]="!form.submitted || a5.valid" class="alert alert-danger">
+        caixa de texto obrigatória
+      </div>
+    </div>
+    <div [hidden]="!postError" class="alert alert-danger">
+      {{ postErrorMessage }}
+    </div>
+
+    <button class="btn btn-primary">Enviar</button>
+  </form>
+</div>
