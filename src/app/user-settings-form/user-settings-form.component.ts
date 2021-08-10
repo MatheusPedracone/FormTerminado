@@ -16,11 +16,9 @@ export class UserSettingsFormComponent implements OnInit {
     exampleRadios: '',
     textarea: '',
     escolha: '',
-    
   };
+
   
-  userRating = 0;
-  maxRating = 10;
   singleModel = false;
   startDate!: Date;
   userSettings: UserSettings = { ...this.originalUserSettings };
@@ -31,7 +29,7 @@ export class UserSettingsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.escolhas = this.dataService.getEscolhas();
-    
+
     this.startDate = new Date();
   }
 
@@ -44,14 +42,14 @@ export class UserSettingsFormComponent implements OnInit {
   onSubmit(form: NgForm) {
     console.log('in onSubmit: ', form.value);
 
-    // if (form.valid) {
-    //   this.dataService.postUserSettingForm(this.userSettings).subscribe(
-    //     (result) => console.log('sucesso: ', result),
-    //     (error) => this.onHtppError(error)
-    //   );
-    // } else {
-    //   this.postError = true;
-    //   this.postErrorMessage = 'Por favor corrija os erros acima';
-    // }
+    if (form.valid) {
+      this.dataService.postUserSettingForm(this.userSettings).subscribe(
+        (result) => console.log('sucesso: ', result),
+        (error) => this.onHtppError(error)
+      );
+    } else {
+      this.postError = true;
+      this.postErrorMessage = 'Por favor corrija os erros acima';
+    }
   }
 }
